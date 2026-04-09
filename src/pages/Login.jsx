@@ -1,0 +1,60 @@
+import { useState } from "react";
+import { Button, Card } from "react-bootstrap";
+
+const Login = () => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(userName,password);
+  };
+
+  return (
+    <>
+      <div className="container">
+        <div className="row justify-content-center align-items-center min-vh-100">
+          <div className="col-12 col-md-6 col-lg-4">
+            <Card className="p-4">
+              <h3 className="text-center">Login</h3>
+              <form>
+                <div className="form-group">
+                  <label htmlFor="email">Email address</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    value={userName}
+                    onChange={(e) => {
+                      setUserName(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                </div>
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="w-100 my-4"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </Button>
+              </form>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+export default Login;
