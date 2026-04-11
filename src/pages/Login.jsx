@@ -1,18 +1,23 @@
 import { useContext, useState } from "react";
 import { Button, Card } from "react-bootstrap";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [userName, setUserName] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
 
   const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email && password) {
-      login(userName);
-      console.log(userName, password);
+      login({email});
+      toast.success("Login Successful");
+      console.log(email, password);
+      navigate("/users")
     }
   };
 
@@ -30,9 +35,9 @@ const Login = () => {
                     type="email"
                     className="form-control"
                     id="email"
-                    value={userName}
+                    value={email}
                     onChange={(e) => {
-                      setUserName(e.target.value);
+                      setemail(e.target.value);
                     }}
                     required
                   />
@@ -55,6 +60,7 @@ const Login = () => {
                 <Button variant="primary" type="submit" className="w-100 my-4">
                   Submit
                 </Button>
+                <ToastContainer />
               </form>
             </Card>
           </div>
