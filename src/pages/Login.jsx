@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { AuthContext } from "../context/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
@@ -8,16 +8,21 @@ const Login = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login } = useContext(AuthContext);
+  const { user, login } = useContext(AuthContext);
   const navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      navigate("/users", { replace: true });
+    }
+  }, [user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email && password) {
-      login({email});
+      login({ email });
       toast.success("Login Successful");
       console.log(email, password);
-      navigate("/users")
+      navigate("/users", { replace: true });
     }
   };
 
