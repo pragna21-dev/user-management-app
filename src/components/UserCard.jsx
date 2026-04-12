@@ -4,14 +4,11 @@ const UserCard = ({ user }) => {
   const navigate = useNavigate();
 
   return (
- <div className="card user-card shadow-sm h-100 border-0">
+    <div className="card user-card shadow-sm h-100 border-0">
       <div className="card-body text-center">
-
         {/* Avatar */}
         <div className="mb-3">
-          <div className="avatar-circle">
-            {user.name.charAt(0)}
-          </div>
+          <div className="avatar-circle">{user.name.charAt(0)}</div>
         </div>
 
         {/* Name */}
@@ -21,22 +18,18 @@ const UserCard = ({ user }) => {
         <p className="text-muted small">{user.email}</p>
 
         {/* City */}
-        <p className="mb-1">
-          📍 {user.address?.city}
-        </p>
+        <p className="mb-1">📍 {user.address?.city}</p>
 
         {/* Company */}
-        <p className="text-muted small mb-3">
-          🏢 {user.company?.name}
-        </p>
+        <p className="text-muted small mb-3">🏢 {user.company?.name}</p>
 
         {/* Buttons */}
         <div className="d-flex justify-content-between gap-2">
-
           <button
             className="btn btn-primary btn-sm w-100"
             // onClick={() => navigate(`/users/${user.id}`)}
           >
+            <i className="bi bi-eye me-2"></i>
             View
           </button>
 
@@ -44,6 +37,7 @@ const UserCard = ({ user }) => {
             className="btn btn-warning btn-sm w-100"
             // onClick={() => onEdit(user)}
           >
+            <i className="bi bi-pencil me-2"></i>
             Edit
           </button>
 
@@ -51,13 +45,12 @@ const UserCard = ({ user }) => {
             className="btn btn-danger btn-sm w-100"
             // onClick={() => onDelete(user.id)}
           >
+            <i className="bi bi-trash me-2"></i>
             Delete
           </button>
-
         </div>
       </div>
     </div>
-
   );
 };
 

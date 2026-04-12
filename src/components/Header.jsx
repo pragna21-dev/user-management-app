@@ -3,12 +3,12 @@ import { AuthContext } from "../context/AuthContext";
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
   return (
-    <nav className="navbar navbar-dark bg-dark px-3">
-      <span className="navbar-brand">User Manage</span>
+    <nav className="navbar custom-navbar px-3">
+      <span className="navbar-brand text-white">User Manage</span>
       {user && (
         <div>
           <span className="text-white">{user.email}</span>
-          <button className="btn btn-danger btn-sm ms-3" onClick={logout}>
+          <button className="btn btn-primary btn-sm ms-3" onClick={logout}>
             Logout
           </button>
         </div>

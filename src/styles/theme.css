@@ -1,0 +1,49 @@
+/* Theme Variables */
+:root {
+  --primary: #6f42c1;
+  --primary-hover: #5a32a3;
+  --bg-light: #f8f9fa;
+  --card-bg: #ffffff;
+  --text-dark: #212529;
+}
+
+/*  Body Style */
+body {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  font-family: Arial, sans-serif;
+}
+
+.custom-navbar {
+  background-color: var(--primary);
+}
+.btn-primary {
+  background-color: var(--primary);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+.user-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+}
+.avatar-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+   font-size: 24px;
+  font-weight: bold;
+}

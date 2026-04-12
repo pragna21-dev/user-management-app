@@ -4,9 +4,9 @@ import "./index.css";
 import App from "./App.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
-
+import "./styles/theme.css";  
 import { AuthProvider } from "./context/AuthContext";
-
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
