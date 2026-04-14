@@ -39,6 +39,22 @@ body {
   height: 60px;
   border-radius: 50%;
   background-color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* important */
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills nicely */
+}
+/* .avatar-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary);
   color: white;
   display: flex;
   align-items: center;
@@ -46,4 +62,4 @@ body {
   margin: auto;
    font-size: 24px;
   font-weight: bold;
-}
+} */

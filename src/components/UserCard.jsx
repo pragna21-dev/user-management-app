@@ -4,29 +4,40 @@ const UserCard = ({ user }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="card user-card shadow-sm h-100 border-0">
-      <div className="card-body text-center">
+    <div className="card mb-3 shadow-sm p-3">
+      <div className="row">
         {/* Avatar */}
-        <div className="mb-3">
-          <div className="avatar-circle">{user.name.charAt(0)}</div>
+        <div className="col-12 col-lg-2  d-flex justify-content-center align-items-center">
+          <div className="avatar-circle">
+          <img
+            src={`https://i.pravatar.cc/100?img=${user.id}`}
+            alt="avatar"
+            className="avatar-img"
+          //   style={{ width: "80px", height: "80px" }
+          // }
+          />
+          </div>
         </div>
 
-        {/* Name */}
-        <h5 className="card-title mb-1">{user.name}</h5>
+        {/* Details */}
+        <div className="col-12 col-lg-6 text-center text-lg-start">
+          <h5 className="mb-1">{user.name}</h5>
+          <p className="mb-1 text-muted">@{user.username}</p>
 
-        {/* Email */}
-        <p className="text-muted small">{user.email}</p>
+          <p className="mb-1">📧 {user.email}</p>
+          <p className="mb-1">
+            📍 {user.address.city}, {user.address.street}
+          </p>
+          <p className="mb-1">🏢 {user.company.name}</p>
 
-        {/* City */}
-        <p className="mb-1">📍 {user.address?.city}</p>
-
-        {/* Company */}
-        <p className="text-muted small mb-3">🏢 {user.company?.name}</p>
-
-        {/* Buttons */}
-        <div className="d-flex justify-content-between gap-2">
+          <small className="text-secondary">
+            📞 {user.phone} | 🌐 {user.website}
+          </small>
+        </div>
+        <div className="col-12 col-lg-4 d-flex justify-content-lg-end justify-content-center align-items-end mt-3 mt-lg-0">
+          {/* <div className="d-flex justify-content-between gap-2"> */}
           <button
-            className="btn btn-primary btn-sm w-100"
+            className="btn btn-primary btn-sm px-2 mx-2"
             // onClick={() => navigate(`/users/${user.id}`)}
           >
             <i className="bi bi-eye me-2"></i>
@@ -34,7 +45,7 @@ const UserCard = ({ user }) => {
           </button>
 
           <button
-            className="btn btn-warning btn-sm w-100"
+            className="btn btn-warning btn-sm px-2 mx-2"
             // onClick={() => onEdit(user)}
           >
             <i className="bi bi-pencil me-2"></i>
@@ -42,7 +53,7 @@ const UserCard = ({ user }) => {
           </button>
 
           <button
-            className="btn btn-danger btn-sm w-100"
+            className="btn btn-danger btn-sm px-2 mx-2 "
             // onClick={() => onDelete(user.id)}
           >
             <i className="bi bi-trash me-2"></i>
