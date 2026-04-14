@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Users from "./pages/Users";
 import MainLayout from "./Layout/MainLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import UserPosts from "./pages/UserPosts";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<MainLayout />}>
               <Route path="/users" element={<Users />} />
+              <Route path="/users/:id" element={<UserPosts />} />
             </Route>
           </Route>
         </Routes>

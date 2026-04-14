@@ -9,13 +9,11 @@ const UserCard = ({ user }) => {
         {/* Avatar */}
         <div className="col-12 col-lg-2  d-flex justify-content-center align-items-center">
           <div className="avatar-circle">
-          <img
-            src={`https://i.pravatar.cc/100?img=${user.id}`}
-            alt="avatar"
-            className="avatar-img"
-          //   style={{ width: "80px", height: "80px" }
-          // }
-          />
+            <img
+              src={`https://i.pravatar.cc/100?img=${user.id}`}
+              alt="avatar"
+              className="avatar-img"
+            />
           </div>
         </div>
 
@@ -35,10 +33,9 @@ const UserCard = ({ user }) => {
           </small>
         </div>
         <div className="col-12 col-lg-4 d-flex justify-content-lg-end justify-content-center align-items-end mt-3 mt-lg-0">
-          {/* <div className="d-flex justify-content-between gap-2"> */}
           <button
             className="btn btn-primary btn-sm px-2 mx-2"
-            // onClick={() => navigate(`/users/${user.id}`)}
+            onClick={() => navigate(`/users/${user.id}`)}
           >
             <i className="bi bi-eye me-2"></i>
             View
@@ -53,7 +50,7 @@ const UserCard = ({ user }) => {
           </button>
 
           <button
-            className="btn btn-danger btn-sm px-2 mx-2 "
+            className="btn btn-outline-danger btn-sm px-2 mx-2 "
             // onClick={() => onDelete(user.id)}
           >
             <i className="bi bi-trash me-2"></i>
