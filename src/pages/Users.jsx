@@ -3,10 +3,13 @@ import { AuthContext } from "../context/AuthContext";
 import Header from "../components/Header";
 import UserCard from "../components/UserCard";
 import { getUsers } from "../services/userService";
+import ConfirmModal from "../components/ConfirmModal";
 
 const Users = () => {
   const { user } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     const getUserList = async () => {
@@ -22,6 +25,17 @@ const Users = () => {
 
     getUserList();
   }, []);
+
+  const handleDelete = (user) => {
+    setSelectedUser(user);
+    setShowModal(true);
+  };
+  const confirmDelete = () => {
+    console.log("delete call");
+    const latestUSers = users.filter((u) => u.id !== selectedUser.id);
+    setUsers(latestUSers);
+    setShowModal(false);
+  };
   return (
     <>
       {/* <p>Hello,{user?.email}</p> */}
@@ -29,7 +43,17 @@ const Users = () => {
         <h3 className="mb-4 fw-bold">Users</h3>
 
         {users &&
-          users.map((userObj) => <UserCard user={userObj} key={userObj.id} />)}
+          users.map((userObj) => (
+            <UserCard user={userObj} key={userObj.id} onDelete={handleDelete} />
+          ))}
+        {/* ✅ Reusable Modal */}
+        <ConfirmModal
+          show={showModal}
+          title="Delete User"
+          message={`Are you sure you want to delete ${selectedUser?.name}?`}
+          onConfirm={confirmDelete}
+          onCancel={() => setShowModal(false)}
+        />
       </div>
     </>
   );

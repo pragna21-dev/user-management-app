@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user,onDelete }) => {
   const navigate = useNavigate();
+ 
 
   return (
     <div className="card mb-3 shadow-sm p-3">
@@ -51,7 +52,7 @@ const UserCard = ({ user }) => {
 
           <button
             className="btn btn-outline-danger btn-sm px-2 mx-2 "
-            // onClick={() => onDelete(user.id)}
+            onClick={() => onDelete(user)}
           >
             <i className="bi bi-trash me-2"></i>
             Delete

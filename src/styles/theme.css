@@ -50,6 +50,10 @@ body {
   height: 100%;
   object-fit: cover; /* fills nicely */
 }
+.comments-box {
+  max-height: 200px;
+  overflow-y: auto;
+}
 /* .avatar-circle {
   width: 60px;
   height: 60px;

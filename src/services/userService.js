@@ -8,9 +8,19 @@ export const getUsers = async () => {
     throw error;
   }
 };
+
 export const getUserPost = async (userId) => {
   try {
     const res = await fetch(`${BASE_URL}/posts?userId=${userId}`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const getCommentsByPost = async (postId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/comments?postId=${postId}`);
     const data = await res.json();
     return data;
   } catch (error) {
