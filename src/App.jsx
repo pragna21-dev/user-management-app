@@ -5,6 +5,7 @@ import Users from "./pages/Users";
 import MainLayout from "./Layout/MainLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UserPosts from "./pages/UserPosts";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+       <ToastContainer position="top-right" autoClose={2000} />
     </>
   );
 }

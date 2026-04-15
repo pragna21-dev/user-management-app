@@ -65,7 +65,7 @@ const Login = () => {
                 <Button variant="primary" type="submit" className="w-100 my-4">
                   Submit
                 </Button>
-                <ToastContainer />
+                {/* <ToastContainer autoClose={6000} /> */}
               </form>
             </Card>
           </div>

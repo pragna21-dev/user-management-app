@@ -25,6 +25,18 @@ body {
 .btn-primary:hover {
   background-color: var(--primary-hover);
 }
+
+.btn-outline-primary {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-hover) !important;
+}
+.text-primary {
+  color: var(--primary)!important;
+}
 .user-card {
   background-color: var(--card-bg);
   border-radius: 12px;
@@ -53,6 +65,9 @@ body {
 .comments-box {
   max-height: 200px;
   overflow-y: auto;
+}
+.custom-badge {
+  background-color: var(--primary);
 }
 /* .avatar-circle {
   width: 60px;

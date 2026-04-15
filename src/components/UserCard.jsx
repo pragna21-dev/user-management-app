@@ -36,7 +36,7 @@ const UserCard = ({ user,onDelete }) => {
         <div className="col-12 col-lg-4 d-flex justify-content-lg-end justify-content-center align-items-end mt-3 mt-lg-0">
           <button
             className="btn btn-primary btn-sm px-2 mx-2"
-            onClick={() => navigate(`/users/${user.id}`)}
+            onClick={() => navigate(`/users/${user.id}`,{state:{name:user.name}})}
           >
             <i className="bi bi-eye me-2"></i>
             View

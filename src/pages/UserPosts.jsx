@@ -1,11 +1,16 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getCommentsByPost, getUserPost } from "../services/userService";
 import { useEffect, useState } from "react";
 
+
 const UserPosts = () => {
   const { id } = useParams();
+  const location = useLocation();
+  const userName = location.state?.name;
+
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState({});
+  const [loadingPost, setLoadingPost] = useState(false);
 
   useEffect(() => {
     loadPosts();
@@ -13,24 +18,26 @@ const UserPosts = () => {
   }, [id]);
 
   const loadPosts = async () => {
+    setLoadingPost(true);
     const data = await getUserPost(id);
     setPosts(data);
+    setLoadingPost(false);
   };
   const loadComments = async (postId) => {
     const data = await getCommentsByPost(postId);
     setComments({ [postId]: data });
   };
-const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <>
-      <button
-        className="btn btn-secondary mb-3"
-        onClick={() => navigate("/")}
-      >
-        Back
-      </button>
+      <div className="d-flex align-items-center justify-content-between">
+        <button className="btn btn-light border" onClick={() => navigate("/")}>
+          ← Back
+        </button>
+        <h4 className="mb-4 text-center"> {userName}'s Posts</h4>
+        <span className="badge custom-badge">{posts.length} Posts</span>
+      </div>
       <div className="container mt-4">
-        <h3 className="mb-4">User {id} Posts</h3>
         {posts &&
           posts.map((post) => (
             <div key={post.id} className="card p-3 mb-3 shadow-sm">
