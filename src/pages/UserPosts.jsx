@@ -2,7 +2,6 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getCommentsByPost, getUserPost } from "../services/userService";
 import { useEffect, useState } from "react";
 
-
 const UserPosts = () => {
   const { id } = useParams();
   const location = useLocation();
@@ -11,6 +10,7 @@ const UserPosts = () => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState({});
   const [loadingPost, setLoadingPost] = useState(false);
+  const [loadingComment, setLoadingComment] = useState({});
 
   useEffect(() => {
     loadPosts();
@@ -24,8 +24,10 @@ const UserPosts = () => {
     setLoadingPost(false);
   };
   const loadComments = async (postId) => {
+    setLoadingComment({ [postId]: true });
     const data = await getCommentsByPost(postId);
     setComments({ [postId]: data });
+    setLoadingComment({ [postId]: false });
   };
   const navigate = useNavigate();
   return (
@@ -35,10 +37,25 @@ const UserPosts = () => {
           ← Back
         </button>
         <h4 className="mb-4 text-center"> {userName}'s Posts</h4>
-        <span className="badge custom-badge">{posts.length} Posts</span>
+
+        <span className="badge custom-badge">
+          {loadingPost ? (
+            <span className="spinner-border spinner-border-sm me-1"></span>
+          ) : (
+            posts.length
+          )}
+          Posts
+        </span>
       </div>
       <div className="container mt-4">
-        {posts &&
+        {loadingPost ? (
+          <div
+            className="d-flex justify-content-center align-items-center"
+            style={{ height: "120px" }}
+          >
+            <div className="spinner-border text-primary"></div>
+          </div>
+        ) : (
           posts.map((post) => (
             <div key={post.id} className="card p-3 mb-3 shadow-sm">
               <h5>{post.title}</h5>
@@ -46,22 +63,16 @@ const UserPosts = () => {
               <div className="d-flex justify-content-end align-items-center  pt-2 mt-3">
                 <button
                   className="btn btn-sm btn-outline-primary mb-3"
+                  // disabled={loadingComment}
                   onClick={() => loadComments(post.id)}
                 >
+                  {loadingComment[post.id] ? (
+                    <span className="spinner-border spinner-border-sm me-1"></span>
+                  ) : null}
                   💬 Show Comments
                 </button>
               </div>
-              {/* <div className="d-flex justify-content-end align-items-center border-top pt-2 mt-3">
-                <span
-                  className="text-primary cursor-pointer"
-                  style={{ cursor: "pointer" }}
-                    onClick={() => loadComments(post.id)}
-                >
-                  💬 {comments[post.id]?.length || 0}  Comments
-                  💬  Comments
-                </span>
-              </div> */}
-              {/* Comments */}
+
               {comments[post.id] && (
                 <div className="border-top pt-3">
                   <h6 className="mb-3">
@@ -80,7 +91,8 @@ const UserPosts = () => {
                 </div>
               )}
             </div>
-          ))}
+          ))
+        )}
       </div>
     </>
   );

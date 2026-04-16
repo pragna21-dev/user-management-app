@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import Header from "../components/Header";
 import UserCard from "../components/UserCard";
 import { getUsers } from "../services/userService";
 import ConfirmModal from "../components/ConfirmModal";
@@ -26,7 +25,6 @@ const Users = () => {
       } finally {
       }
     };
-
     getUserList();
   }, []);
 
@@ -35,7 +33,6 @@ const Users = () => {
     setShowModal(true);
   };
   const confirmDelete = () => {
-    console.log("delete call");
     const latestUSers = users.filter((u) => u.id !== selectedUser.id);
     setUsers(latestUSers);
     toast.success(`${selectedUser.name} removed ✅`);
@@ -43,7 +40,6 @@ const Users = () => {
   };
   return (
     <>
-      {/* <p>Hello,{user?.email}</p> */}
       <div className="container mt-4">
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h3 className="mb-0 fw-bold">Users</h3>
@@ -60,7 +56,6 @@ const Users = () => {
             <div className="spinner-border text-primary"></div>
           </div>
         ) : (
-          // {users &&
           users.map((userObj) => (
             <UserCard user={userObj} key={userObj.id} onDelete={handleDelete} />
           ))
