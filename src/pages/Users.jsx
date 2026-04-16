@@ -4,11 +4,13 @@ import UserCard from "../components/UserCard";
 import { getUsers } from "../services/userService";
 import ConfirmModal from "../components/ConfirmModal";
 import { toast } from "react-toastify";
+import UserFormModal from "../components/UserFormModal";
 
 const Users = () => {
   const { user } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showUserFormModal, setShowUserFormModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [loadingUsers, setLoadingUsers] = useState(false);
 
@@ -43,8 +45,11 @@ const Users = () => {
       <div className="container mt-4">
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h3 className="mb-0 fw-bold">Users</h3>
-          <button className="btn btn-primary px-4" disabled={loadingUsers}>
-            {" "}
+          <button
+            className="btn btn-primary px-4"
+            disabled={loadingUsers}
+            onClick={() => setShowUserFormModal(true)}
+          >
             + Add User
           </button>
         </div>
@@ -67,6 +72,10 @@ const Users = () => {
           message={`Are you sure you want to delete ${selectedUser?.name}?`}
           onConfirm={confirmDelete}
           onCancel={() => setShowModal(false)}
+        />
+        <UserFormModal
+          show={showUserFormModal}
+          onClose={() => setShowUserFormModal(false)}
         />
       </div>
     </>
