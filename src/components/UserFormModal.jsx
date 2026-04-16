@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 const UserFormModal = ({ show, onClose }) => {
+  const [errors, setErrors] = useState({});
+
   const cities = [
     "Gwenborough",
     "Wisokyburgh",
@@ -25,7 +27,27 @@ const UserFormModal = ({ show, onClose }) => {
     website: "",
     gender: "",
   });
-  console.log("show:", show);
+
+  const validate = () => {
+    const newError = {};
+    if (!form.name) newError.name = "Name is required";
+    console.log(newError);
+
+    setErrors(newError);
+
+    return Object.keys(newError).length === 0;
+  };
+
+  const handleSubmit = () => {
+    if (!validate()) return;
+    console.log("Form submitted ✅");
+  };
+
+  const handleChange = (e) => {
+    setForm({ [e.target.name]: e.target.value });
+
+    setErrors({ [e.target.name]: "" });
+  };
 
   if (!show) return null;
   return (
@@ -48,9 +70,14 @@ const UserFormModal = ({ show, onClose }) => {
                 <div className="col-md-6">
                   <input
                     name="name"
-                    className="form-control"
+                    value={form.name}
+                    className={`form-control ${errors.name ? "is-invalid" : ""}`}
                     placeholder="Name"
+                    onChange={handleChange}
                   />
+                  {errors.name && (
+                    <div className="invalid-feedback">{errors.name}</div>
+                  )}
                 </div>
                 <div className="col-md-6">
                   <input
@@ -115,7 +142,7 @@ const UserFormModal = ({ show, onClose }) => {
                       id="male"
                       value="male"
                     />
-                    <label className="form-check-label" for="male">
+                    <label className="form-check-label" htmlFor="male">
                       Male
                     </label>
                   </div>
@@ -127,7 +154,7 @@ const UserFormModal = ({ show, onClose }) => {
                       id="Female"
                       value="Female"
                     />
-                    <label className="form-check-label" for="Female">
+                    <label className="form-check-label" htmlFor="Female">
                       Female
                     </label>
                   </div>
@@ -143,7 +170,11 @@ const UserFormModal = ({ show, onClose }) => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleSubmit}
+              >
                 Save changes
               </button>
             </div>
