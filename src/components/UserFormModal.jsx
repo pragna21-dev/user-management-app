@@ -30,9 +30,13 @@ const UserFormModal = ({ show, onClose }) => {
 
   const validate = () => {
     const newError = {};
-    if (!form.name) newError.name = "Name is required";
+    if (!form.name) {
+      newError.name = "Name is required";
+    }
+    if (!form.username) {
+      newError.username = "Username is required";
+    }
     console.log(newError);
-
     setErrors(newError);
 
     return Object.keys(newError).length === 0;
@@ -44,9 +48,13 @@ const UserFormModal = ({ show, onClose }) => {
   };
 
   const handleChange = (e) => {
-    setForm({ [e.target.name]: e.target.value });
+    // setForm({ [e.target.name]: e.target.value });
+    // setErrors({ [e.target.name]: "" });
+      const { name, value } = e.target;
 
-    setErrors({ [e.target.name]: "" });
+  // ✅ form merge (not overwrite)
+    setForm((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   if (!show) return null;
@@ -81,10 +89,14 @@ const UserFormModal = ({ show, onClose }) => {
                 </div>
                 <div className="col-md-6">
                   <input
-                    name="userName"
-                    className="form-control"
+                    name="username"
+                    className={`form-control ${errors.username ? "is-invalid" : ""}`}
                     placeholder="UserName"
+                    onChange={handleChange}
                   />
+                  {errors.username && (
+                    <div className="invalid-feedback">{errors.username}</div>
+                  )}
                 </div>
                 <div className="col-md-6">
                   <input
